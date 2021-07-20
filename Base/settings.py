@@ -86,7 +86,7 @@ if local == 0:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'postgres',
             'USER': 'postgres',
-            'PASSWORD': 'admin',
+            'PASSWORD': 'neha1626',
             'HOST': 'localhost'
         }
     }
