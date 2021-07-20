@@ -1,0 +1,150 @@
+{% load static %}
+
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+    @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+
+
+.responsive
+{
+	width:20%;
+
+}
+#logo{
+height:30px;
+wdith:30px;
+float:left;
+}
+
+</style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+<img src="C:\Users\hp\Performance-Monitoring\media\logo.png"  height="200px">
+    <div id="header_content">
+    	<b><h3 style="font-size:20px">Performance Analysis</h3></b>
+
+
+    </div>
+    <hr>
+
+    <h1>From Date: <b>{{fromdate1}}</b></h1>
+    <h1>To Date: <b>{{todate1}}</b></h1>
+    <h1>MachineID: <b>{{MachineID}}</b></h1>
+    <h1>AssetID: <b>{{AssetID}}</b></h1>
+
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">(c) - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>
+
+    <!-- HTML Content -->
+    <hr>
+    <br>
+    <b><h4 style="font-size:16px">KPI'S</h4></b>
+    <table border="1px">
+    	<tr style="height:30px; font-size:12px">
+
+    		<th>Availability</th>
+            <th>Quality</th>
+    		<th>Performance</th>
+
+
+    	</tr>
+    	<tr style="height:30px;text-align:center;font-size:12px">
+
+    		<td>{{Availability}}%</td>
+            <td>{{Quality}}%</td>
+    		<td>{{Performance}}%</td>
+
+
+    	</tr>
+    </table>
+
+    <hr>
+    <br>
+
+    <b><h4 style="font-size:16px">Availability</h4></b>
+    <table border="1px">
+    	<tr style="height:30px; font-size:12px">
+
+    		<th>Operating Time</th>
+            <th>Breakdown Time</th>
+
+
+
+    	</tr>
+    	<tr style="height:30px;text-align:center;font-size:12px">
+
+    		<td>{{OperatingOnTime}}.mins</td>
+            <td>{{BreakdownOnTime}}.mins</td>
+
+
+
+    	</tr>
+    </table>
+<hr>
+<br>
+    <b><h4 style="font-size:16px">Performance</h4></b>
+    <table border="1px">
+    	<tr style="height:30px; font-size:12px">
+
+    		<th>Actual Count</th>
+            <th>Ideal Batch Count</th>
+
+
+
+    	</tr>
+    	<tr style="height:30px;text-align:center;font-size:12px">
+
+    		<td>{{theIdealBatchArr}}.units</td>
+            <td>{{ActualBatchPer}}.units</td>
+
+
+
+    	</tr>
+    </table>
+<hr>
+<br>
+    <b><h4 style="font-size:16px">Quality</h4></b>
+    <table border="1px">
+    	<tr style="height:30px; font-size:12px">
+
+    		<th>Good Batch</th>
+            <th>Bad Batch</th>
+
+
+
+    	</tr>
+    	<tr style="height:30px;text-align:center;font-size:12px">
+
+    		<td>{{QualGoodBatch}}</td>
+            <td>{{QualBadBatch}}</td>
+
+
+
+    	</tr>
+    </table>
+<hr>
+
+
+</body>
+</html>

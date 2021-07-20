@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<style>
+.container form{
+    width:50%;
+    float:left;
+}
+#mactb {
+  border-collapse: collapse;
+
+  border-spacing: 0;
+  width: 100%;
+  border:none;
+}
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: none;
+}
+#machtb th, td, a{
+text-decoration:none;
+color:black;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button a{
+color:transparent;
+}
+.button2 {background-color: #008CBA;
+ } /* Blue */
+
+.button3 {background-color: #f44336;
+} /* Red */
+
+input[type=text], select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+</style>
+</style>
+
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+<script>
+    var csrfToken = getCookie('XSRF-TOKEN');
+    console.log(csrfToken);
+    window.onload = function(){
+        var csrfToken = getCookie('XSRF-TOKEN');
+         document.getElementById('csrf').value = csrfToken ;
+    }
+</script>
+
+<form action="MachineInstance" class="container" method="post">
+<!--        {% csrf_token %}-->
+        <input type="hidden" id="csrf" name="_csrf" value="">
+                           <br>
+
+    <h3>Machine Id: </h3>
+    <input type="text" placeholder="Enter ID" name="MachineID" autocomplete="off" required>
+    <h3>Asset Id: </h3>
+    <input type="text" placeholder="Enter Asset Id" name="AssetID" autocomplete="off" required>
+
+    <h3> Machine Name:</h3>
+    <input type="text" placeholder="Enter Name" name="MachineName" autocomplete="off" required>
+    <h3 > Machine Capacity: </h3>
+    <input type="text" placeholder="Enter Capacity" name="Capacity" autocomplete="off" required>
+
+
+    <br>
+        <br>
+    <button type="submit" class="button">Add machine</button>
+
+    </form>
+<br>
+<div style="overflow-x:auto;" style="float:right;" >
+<table id="mactb">
+    <thead>
+    <tr>
+        <th>Machine ID</th>
+        <th>Asset ID</th>
+        <th>Machine Name</th>
+        <th>Capacity</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+{% for result in data %}
+<tr >
+    <td>{{result.MachineID}}</td>
+    <td>{{result.AssetID}}</td>
+    <td>{{result.MachineName}}</td>
+    <td>{{result.Capacity}}</td>
+    <td><a href="/edit/{{ result.MachineID }}" role="button"><button class="button button2">Edit</button></a>
+     <a href="/delete/{{result.MachineID}}"  role="button"><button class="button button3">X</button></a></td>
+</tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,1 @@
+web: gunicorn PerformanceCalculator.wsgi --workers 2

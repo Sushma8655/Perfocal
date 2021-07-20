@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}" >
+<script src="{% static '/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/js/jquery.js' %}" type="text/javascript"></script>
+    <script src="{% static '/js/popper.min.js' %}" type="text/javascript"></script>
+
+
+
+<style>
+  .table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table td,.table th{
+  padding:12px 15px;
+  border:1px solid #ddd;
+  text-align: center;
+  font-size:16px;
+}
+
+.table th{
+	background-color: #DBD7D2;
+	color:black;
+}
+
+.table tbody tr:nth-child(even){
+	background-color: #f5f5f5;
+}
+
+/*responsive*/
+
+@media(max-width: 500px){
+	.table thead{
+		display: none;
+	}
+
+	.table, .table tbody, .table tr, .table td{
+		display: block;
+		width: 100%;
+	}
+	.table tr{
+		margin-bottom:15px;
+	}
+	.table td{
+		text-align: right;
+		padding-left: 50%;
+		text-align: right;
+		position: relative;
+	}
+	.table td::before{
+		content: attr(data-label);
+		position: absolute;
+		left:0;
+		width: 50%;
+		padding-left:15px;
+		font-size:15px;
+		font-weight: bold;
+		text-align: left;
+	}
+}
+
+</style>
+<style>
+
+
+ul.no-bullets {
+  list-style-type: none;
+  white-space:nowrap;
+  margin: 0;
+  padding: 0px 50px 20px 0px;
+
+}
+ul.no-bullets li{
+display:inline;
+padding:0px 10px 0px 0px;
+}
+What you're looking for can be easily achieved with a few lines of CSS. You can view the CSS I've created (and documented) in this JSFiddle: https://jsfiddle.net/8oLxr7ke/
+
+.press {
+    display: block;  /* Remove bullet points; allow greater control of positioning */
+    padding: 0;      /* Override defaults for lists */
+    margin: 0;       /* Override defaults for lists */
+    width: 100%;     /* Get the row full width */
+}
+
+.press li {
+    display: inline-block; /* Get all images to show in a row */
+    width: 25%;            /* Show 4 logos per row */
+    text-align: center;    /* Centre align the images */
+}
+
+@media (max-width: 960px) and (min-width: 501px) {
+    .press li { width: 50%; } /* Show 2 logos per row on medium devices (tablets, phones in landscape) */
+}
+
+@media (max-width: 500px) {
+    .press li { width: 100%; } /* On small screens, show one logo per row */
+}
+</style>
+
+</head>
+<body>
+<br><br>
+<h1 align="center">Repair The Maintenance</h1>
+<!--{{ok}}-->
+<div class="container" style="padding:0px 0px 0px 0px;">
+
+<section class="section-content py-3">
+	<div class="row">
+		{% include 'maintenance/maintenanceSidePanel.html' %}
+		<main class="col-lg-9">
+
+            <form method="POST" action="">
+            <div class="container">
+               <div class='center' style = "margin-top:3%; margin-bottom:5%">
+                    <ul class="press">
+                      <li>
+                        <div class="press-logo">
+                          <strong>Element ID: &nbsp;<br></strong>
+                            {{form1.elementID}}
+                        </div>
+                        <span class="sr-only"></span>
+                      </li>
+                        <li>
+                        <div class="press-logo">
+                          <strong>Installation Date: &nbsp;</strong>
+                               {{form1.installationMaintenanceDate}}
+                        </div>
+                        <span class="sr-only"></span>
+                      </li>
+                        <li>
+                        <div class="press-logo" style="padding:0px 0px 0px 30px;">
+                          <strong>Update in Regular cycle: &nbsp;</strong>
+                                {{form1.repairUpdateCycle}}<br>
+
+                        </div>
+                        <span class="sr-only"></span>
+                      </li>
+                        <div class="press-logo" style="margin-left:60px;margin-top:30px;">
+                        <button type="submit" type="button" class="btn btn-success">Submit</button>
+                        </div>
+                        <span class="sr-only"></span>
+                      </li>
+                    </ul>
+                    </div>
+            </div>
+            </form>
+            <table class="table">
+                 <thead>
+                    <tr>
+                     <th>Element-ID</th>
+                     <th>Installation/Maintenance Date</th>
+                     <th>Next Due Date</th>
+                     <th>Initiate Status</th>
+                     <th>Initiated Time</th>
+                     <th>Acknowledge Status</th>
+                     <th>Acknowledge Time</th>
+                     <th>Close Status</th>
+                     <th>Closed Time</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                  {% for object in initObj %}
+                      <tr>
+                          <td data-label="Element-ID:">{{object.elementID}}</td>
+                          <td data-label="Maintenance Date:">{{object.installationMaintenanceDate}}</td>
+                          <td data-label="Next Due Date:">{{object.nextDueDate}}</td>
+                          <td data-label="Initiate Status:">{{object.initiateStatus}}</td>
+                          <td data-label="Initiate Time:">{{object.initiateTimestamp}}</td>
+                          <td data-label="Acknowledge Status:">{{object.ackStatus}}</td>
+                          <td data-label="Acknowledge Time:">{{object.ackTimestamp}}</td>
+                          <td data-label="Close Status:">{{object.closeStatus}}</td>
+                          <td data-label="Close Time:">{{object.closeTimestamp}}</td>
+                      </tr>
+                 {% endfor %}
+                 </tbody>
+               </table>
+
+		</main>
+	</div>
+</section>
+
+</div><!-- container //  -->
+
+</body>
+</html>
+{% endblock content %}
