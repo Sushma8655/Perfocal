@@ -6,9 +6,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <style>
-.container form{
-    width:50%;
-    float:left;
+input {
+width:70%;
 }
 #mactb {
   border-collapse: collapse;
@@ -49,18 +48,10 @@ color:transparent;
 .button3 {background-color: #f44336;
 } /* Red */
 
-input[type=text], select {
-      width: 50%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+
 
 </style>
-</style>
+
 
 <script>
 function getCookie(name) {
@@ -87,30 +78,61 @@ function getCookie(name) {
          document.getElementById('csrf').value = csrfToken ;
     }
 </script>
-
-<form action="MachineInstance" class="container" method="post">
-<!--        {% csrf_token %}-->
-        <input type="hidden" id="csrf" name="_csrf" value="">
-                           <br>
-
-    <h3>Machine Id: </h3>
-    <input type="text" placeholder="Enter ID" name="MachineID" autocomplete="off" required>
-    <h3>Asset Id: </h3>
-    <input type="text" placeholder="Enter Asset Id" name="AssetID" autocomplete="off" required>
-
-    <h3> Machine Name:</h3>
-    <input type="text" placeholder="Enter Name" name="MachineName" autocomplete="off" required>
-    <h3 > Machine Capacity: </h3>
-    <input type="text" placeholder="Enter Capacity" name="Capacity" autocomplete="off" required>
-
-
-    <br>
-        <br>
-    <button type="submit" class="button">Add machine</button>
-
-    </form>
 <br>
-<div style="overflow-x:auto;" style="float:right;" >
+<hr>
+<div class="container">
+<form method="POST" action="">
+<h3>Add Machine Form</h3>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="MachineID">Machine ID:</label>
+            <br>
+           <input type="text" name="MachineID" id="MachineID" autocomplete="off" required>
+        </div>
+      </div>
+      <!--  col-md-6   -->
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="AssetID">Asset ID:</label>
+            <br>
+           <input type="text" name="AssetID" id="AssetID" autocomplete="off" required>
+        </div>
+      </div>
+      <!--  col-md-6   -->
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="MachineName">Machine Name:</label>
+            <br>
+          <input type="text" name="MachineName" id="MachineName" autocomplete="off" required>
+        </div>
+      </div>
+
+      <!--  col-md-6   -->
+
+      <div class="col-md-6">
+
+        <div class="form-group">
+          <label for="Capacity">Machine Capacity:</label>
+            <br>
+         <input type="text" name="Capacity" id="Capacity" autocomplete="off" required>
+        </div>
+      </div>
+      <!--  col-md-6   -->
+    </div>
+    <!--  row   -->
+
+    <button type="submit" class="btn btn-success">Add Machine</button>
+  </form>
+</div>
+<hr>
+<div style="overflow-x:auto;" >
 <table id="mactb">
     <thead>
     <tr>
@@ -128,8 +150,8 @@ function getCookie(name) {
     <td>{{result.AssetID}}</td>
     <td>{{result.MachineName}}</td>
     <td>{{result.Capacity}}</td>
-    <td><a href="/edit/{{ result.MachineID }}" role="button"><button class="button button2">Edit</button></a>
-     <a href="/delete/{{result.MachineID}}"  role="button"><button class="button button3">X</button></a></td>
+    <td><a href="/edit/{{ result.MachineID }}" role="button"><button class="btn btn-primary">Edit</button></a>
+     <a href="/delete/{{result.MachineID}}"  role="button"><button class="btn btn-danger">X</button></a></td>
 </tr>
         {% endfor %}
     </tbody>
