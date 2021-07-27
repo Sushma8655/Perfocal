@@ -103,7 +103,7 @@ def acknowledge(request):
     else:
         form = maintenanceAcknowledge(request.POST or None)
     initObj = initiateMaintenance.objects.all().filter(initiateStatus="Initiated")
-    return render(request, 'maintenance/acknowledge.html', {'time': x1, 'form': form,'initObj':initObj})
+    return HttpResponseRedirect('/maintenance/acknowledge', {'time': x1, 'form': form,'initObj':initObj})
 
 def ackApproved(request,elementID):
     x1 = datetime.now()

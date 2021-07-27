@@ -89,15 +89,15 @@ function getCookie(name) {
 <br>
 <hr>
 <div class="container">
-<form method="POST" action="MachineInstance">
-<h3>Add Machine Form</h3>
+<form method="POST" action="/update/{{editdata.MachineID}}">
+<h3>Update Machine Details</h3>
     <hr>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="MachineID">Machine ID:</label>
             <br>
-           <input type="text" name="MachineID" id="MachineID" autocomplete="off" required>
+           <input type="text" name="MachineID" id="MachineID" autocomplete="off" value="{{editdata.MachineID}}" required>
         </div>
       </div>
       <!--  col-md-6   -->
@@ -106,7 +106,7 @@ function getCookie(name) {
         <div class="form-group">
           <label for="AssetID">Asset ID:</label>
             <br>
-           <input type="text" name="AssetID" id="AssetID" autocomplete="off" required>
+           <input type="text" name="AssetID" id="AssetID" autocomplete="off" value="{{editdata.AssetID}}" required>
         </div>
       </div>
       <!--  col-md-6   -->
@@ -118,7 +118,7 @@ function getCookie(name) {
         <div class="form-group">
           <label for="MachineName">Machine Name:</label>
             <br>
-          <input type="text" name="MachineName" id="MachineName" autocomplete="off" required>
+          <input type="text" name="MachineName" id="MachineName" autocomplete="off" value="{{editdata.MachineName}}" required>
         </div>
       </div>
 
@@ -129,7 +129,7 @@ function getCookie(name) {
         <div class="form-group">
           <label for="Capacity">Machine Capacity:</label>
             <br>
-         <input type="text" name="Capacity" id="Capacity" autocomplete="off" required>
+         <input type="text" name="Capacity" id="Capacity" autocomplete="off" value="{{editdata.Capacity}}" required>
         </div>
       </div>
       <!--  col-md-6   -->
@@ -140,30 +140,6 @@ function getCookie(name) {
   </form>
 </div>
 <hr>
-<div style="overflow-x:auto;" >
-<table id="mactb">
-    <thead>
-    <tr>
-        <th>Machine ID</th>
-        <th>Asset ID</th>
-        <th>Machine Name</th>
-        <th>Capacity</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-{% for result in data %}
-<tr >
-    <td>{{result.MachineID}}</td>
-    <td>{{result.AssetID}}</td>
-    <td>{{result.MachineName}}</td>
-    <td>{{result.Capacity}}</td>
-    <td><a href="/Perfocal/edit/{{result.MachineID}}" role="button"><button class="btn btn-primary">Edit</button></a>
-     <a href="/Perfocal/delete/{{result.MachineID}}"  role="button"><button class="btn btn-danger">X</button></a></td>
-</tr>
-        {% endfor %}
-    </tbody>
-  </table>
-</div>
+
 
 {% endblock content %}

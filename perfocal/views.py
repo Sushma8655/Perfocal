@@ -146,7 +146,7 @@ def home(request):
             context = processor.processvalue.showplot(self=context1)
         else:
             tempto = datetime.now()
-            tempfrom = tempto - timedelta(hours=300)
+            tempfrom = tempto - timedelta(hours=360)
             temptoString = datetime.strftime(tempto, '%Y-%m-%dT%H:%M:%SZ')
             tempfromString = datetime.strftime(tempfrom, '%Y-%m-%dT%H:%M:%SZ')
             fromdate = tempfromString
@@ -202,7 +202,6 @@ def MachineInstance(request):
         AssetID = request.POST['AssetID']
         MachineName = request.POST['MachineName']
         Capacity = request.POST['Capacity']
-
         if AddMachine.objects.filter(MachineID=MachineID).exists():
             results = AddMachine.objects.all()
             return render(request, 'device.html', {'data': results, 'date': x})
@@ -210,7 +209,7 @@ def MachineInstance(request):
             machine = AddMachine(MachineID=MachineID, MachineName=MachineName, Capacity=Capacity, AssetID=AssetID)
             machine.save()
             results = AddMachine.objects.all()
-            return render(request, 'device.html', {'data': results, 'date': x})
+            return render(request, 'dashboard.html', {'data': results, 'date': x})
     else:
         results = AddMachine.objects.all()
         return render(request, 'device.html', {'data': results, 'date': x})
@@ -330,3 +329,21 @@ class DownloadPDF(View):
         response['Content-Disposition'] = content
         return response
 
+@login_required(login_url='login')
+def edit(request, MachineID):
+    editMachineID = AddMachine.objects.get(MachineID=MachineID)
+    return render(request,'edit.html',{'editdata':editMachineID,'date':x})
+
+def update(request, MachineID):
+    updateMachineID = AddMachine.objects.get(MachineID = MachineID)
+    form = AddMachine(request.POST,instance=updateMachineID)
+    if form.is_valid():
+        form.save(commit=True)
+        return redirect('/machines')
+    return render (request, 'edit.html',{'updatedata':updateMachineID,'date':x})
+
+def destroy(request,MachineID):
+    MachineID = AddMachine.objects.get(MachineID=MachineID)
+    MachineID.delete()
+    results = AddMachine.objects.all()
+    return redirect('/machines', {'data':results,'date':x})

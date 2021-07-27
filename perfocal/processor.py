@@ -161,10 +161,10 @@ class processvalue:
             OpenPlanBreak = [xaxis1, yaxis8]
             OperPlanBreakline.insert(-1, OperPlanBreaklinetemp)
             OperPlanBreakNew.insert(-1, OpenPlanBreak)
-            print("The OperPlan break", OperPlanBreakNew)
+            # print("The OperPlan break", OperPlanBreakNew)
             TotalOperatingCount = len(ylistOperatingTime)
             OperatingOnTime = admin.countX(ylistOperatingTime, 1)
-            print("OperatingOnTime", OperatingOnTime)
+            # print("OperatingOnTime", OperatingOnTime)
             OperatingOffTime = admin.countX(ylistOperatingTime, 0)
 
             TotalProductiveTime = len(ylistProductiveTime)
@@ -182,7 +182,7 @@ class processvalue:
             TotalUnplannedStopCount = len(ylistUnplannedStop)
             UnplannedStopOnTime = admin.countX(ylistUnplannedStop, 1)
             UnplannedStopOffTime = admin.countX(ylistUnplannedStop, 0)
-            print("The Unplanned Stop On Time", UnplannedStopOnTime)
+            # print("The Unplanned Stop On Time", UnplannedStopOnTime)
 
             TotalBreakdownCount = len(ylistBreakdownTime)
             BreakdownOnTime = admin.countX(ylistBreakdownTime, 1)
@@ -318,7 +318,7 @@ class processvalue:
             # #
             # # print("My Json",i['_time'])
             #
-            idealBatch = 20
+            idealBatch = 186
             ActualBatch = lenOfTheBatch
             MissedBatch = idealBatch - lenOfTheBatch
             Performance = round(ActualBatch / idealBatch * 100, 1)
@@ -360,19 +360,19 @@ class processvalue:
                 xaxis = datetime.strftime(utc_date_str, '%d/%m/%Y')
                 DateArray.append(xaxis)
             countofDateArr = len(DateArray)
-            print("The Length of Date",countofDateArr)
+            # print("The Length of Date",countofDateArr)
             countOfBatchNo = len(ylistBatchNo)
-            print("count of batchno", countOfBatchNo)
+            # print("count of batchno", countOfBatchNo)
             # OperPlaneBreak = [DateArray,ylistBatchNo]
             # OperPlanBreakNew.insert(-1,OperPlaneBreak)
 
-            print("The Operplanbreaknew", OperPlanBreakNew)
+            # print("The Operplanbreaknew", OperPlanBreakNew)
 
             UniqueOpenbreak = []
             for i in OperPlanBreakNew:
                 if i not in UniqueOpenbreak:
                     UniqueOpenbreak.append(i)
-            print("This is the Unique", UniqueOpenbreak)
+            # print("This is the Unique", UniqueOpenbreak)
             # BahutUnique = { k[0]: k[1:] for k in UniqueOpenbreak}
             # print("Bahut Unique",BahutUnique)
             d = defaultdict(list)
@@ -381,7 +381,7 @@ class processvalue:
             # i = iter(UniqueOpenbreak)
             # my_dict = dict((a[0], b) for a, b in zip(i, i))
             DBUniqueDict = dict(d)
-            print("Bahut Unique", DBUniqueDict)
+            # print("Bahut Unique", DBUniqueDict)
             lenValue = (list(DBUniqueDict.values()))
             # for key,value in DBUniqueDict:
             #     if value != None:
@@ -394,11 +394,11 @@ class processvalue:
 
             lenofValueArray = len(MyValArray)
 
-            print("len Of Value", MyValArray)
+            # print("len Of Value", MyValArray)
 
             theIdealBatchArr = [15] * lenofValueArray
             theDollarArray = [item * 2 for item in MyValArray]
-            print("The ideal Batch Array", theIdealBatchArr)
+            # print("The ideal Batch Array", theIdealBatchArr)
 
             for i in OperPlanBreakNew:
                 if i[0] != '08/06/2021' and i[0] != '09/06/2021':
